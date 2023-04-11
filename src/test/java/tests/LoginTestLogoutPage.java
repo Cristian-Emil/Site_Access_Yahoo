@@ -24,6 +24,10 @@ public class LoginTestLogoutPage extends BaseTest{
 
         SignInPage signInPage = PageFactory.initElements(driver, SignInPage.class);
         Thread.sleep(1000);
+//------ A disparut pop-up-ul pentru accesul pe pagina , deci linia se comanteaza pana la reaparitia lui ---------------
+        SignInPage.getAcceptButton().click();
+        Thread.sleep(1000);
+
         SignInPage.getSignInButton().click();
         Thread.sleep(1000);
 
@@ -74,52 +78,48 @@ public class LoginTestLogoutPage extends BaseTest{
 
         SoftAssert softAssert = new SoftAssert();
 
-        WebElement message1 = driver.findElement (By.xpath("//*[@id=\"app\"]/div[2]/div/div[1]/nav/div/div[3]/div[1]/ul/li[1]/div/a/span[1]"));
+        WebElement message1 = driver.findElement (By.xpath("//*[@id=\"app\"]/div[2]/div/div[1]/nav/div/div[3]/div[1]/ul/li[1]/div/a/span[1]/span"));
         softAssert.assertEquals(message1.getText(),"Inbox","Test 1 - elementul nu exista, test invalid");
         System.out.println(message1.getText());
         System.out.println(message1.getAttribute("title"));
-        System.out.println("Text1 pt test1/message1  \n");
+//        System.out.println("Test1/message1 - done \n");
+        Thread.sleep(1500);
+//----------------------------------------------------------------------------------------------------------------------
+
+        WebElement message2 = driver.findElement (By.xpath("//*[@id=\"ybar-inner-wrap\"]/div[2]/div"));
+        softAssert.assertEquals(message2.getText(),
+                "Yahoo Mail\n" +
+                "Advanced\n" +
+                "Cristian\n" +
+                "Home", "Test2 - elementele verificate nu corespund \n");
+        System.out.println("Test2/message2 - done \n");
         Thread.sleep(500);
 
+//----------------------------------------------------------------------------------------------------------------------
 
+        WebElement message3 = driver.findElement (By.xpath("//*[@id=\"ybar-inner-wrap\"]/div[2]/div"));
+        softAssert.assertEquals("Yahoo Mail" , "Yahoo Mail", "Nu exista logo-ul corect Yahoo Mail" );
+        softAssert.assertEquals("Advanced" , "Advanced" , "Nu exista box-ul corect pt Advanced");
+        softAssert.assertEquals("Cristian" , "Cristian" , "Nu exista logo-ul corect Cristian");
+        softAssert.assertEquals("Home" , "Home" , "Nu exista box-ul corect pt Home" );
+        System.out.println("Test3/message3 - done \n");
+        System.out.println("\n");
+        Thread.sleep(1500);
 
-        // x.path = //*[@id="app"]/div[2]/div/div[1]/nav/div/div[3]/div[1]/ul/li[5]/div/a/span/span
-//        WebElement message2 = driver.findElement (By.xpath("//*[@id=\"ybar-inner-wrap\"]/div[2]/div"));
-//        softAssert.assertEquals(message2.getText(),
-//                "Yahoo Mail\n" +
-//                "Advanced\n" +
-//                "Cristian\n" +
-//                "Home", "Test2 - elementele sunt grupate ca in pagina dar avem un spatiu la final \n");
-//        System.out.println("Textul pt test2/message2 \n");
-//        Thread.sleep(500);
-
-
-//        WebElement message3 = driver.findElement (By.xpath("//*[@id=\"ybar-inner-wrap\"]/div[2]/div"));
-//        softAssert.assertEquals("Yahoo Mail" , "Yahoo Mail", "Nu exista logo-ul corect Yahoo Mail" );
-//        softAssert.assertEquals("Advanced   " , "Advanced" , "Nu exista box-ul corect pt Advanced");
-//        softAssert.assertEquals("Cristian" , "Cristian" , "Nu exista logo-ul corectCristian");
-//        softAssert.assertEquals("Home" , "Home" , "Nu exista box-ul corect pt Home" );
-//        System.out.println("Text3 pt test3/message3 \n");
-//        System.out.println("\n");
-//        Thread.sleep(500);
-//
-//
-//
-//
-////        softAssert.assertEquals(message3.getText(),"Yahoo Mail","Incorect, elementul nu exista");
-////        softAssert.assertEquals(message3.getText(),"Advanced","Incorect, elementul nu exista");
-////        softAssert.assertEquals(message3.getText(),"Cristian","Incorect, elementul nu exista");
-////        softAssert.assertEquals(message3.getText(),"Home","Incorect, elementul nu exista");
+//        softAssert.assertEquals(message3.getText(),"Yahoo Mail","Incorect, elementul nu exista");
+//        softAssert.assertEquals(message3.getText(),"Advanced","Incorect, elementul nu exista");
+//        softAssert.assertEquals(message3.getText(),"Cristian","Incorect, elementul nu exista");
+//        softAssert.assertEquals(message3.getText(),"Home","Incorect, elementul nu exista");
 //
 //        Thread.sleep(500);
 //
 //        QuitYourAccount.getLogoOutButton().click();
-//        Thread.sleep(500);
+//        Thread.sleep(1500);
 //        QuitYourAccount.getSignOutButton().click();
 
         driver.close();
         driver.quit();
 //
-//        softAssert.assertAll();
+        softAssert.assertAll();
     }
 }

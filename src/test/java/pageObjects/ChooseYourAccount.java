@@ -30,9 +30,8 @@ public class ChooseYourAccount {
 
 // ---------------------------------------------------------------------------
 
-    @FindBy(xpath = "//*[@id=\"ybar-navigation-item-mail\"]/a")
+    @FindBy(xpath = "//*[@id=\"root_1\"]")
     private static WebElement gotoMail;
     public static WebElement getMail() { return gotoMail; }
-
 
 }

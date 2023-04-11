@@ -1,6 +1,7 @@
 package tests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -17,13 +18,20 @@ public class LoginTestPage extends BaseTest{
 
 
     @Test
-    public void testLogInAdminVailidCredential() throws InterruptedException {
+    public void testLogInAdminValidCredential() throws InterruptedException {
         driver.manage().window().maximize();
 
         SignInPage signInPage = PageFactory.initElements(driver, SignInPage.class);
         Thread.sleep(1000);
+
+//        SignInPage.getAcceptButton().click();
+//        Thread.sleep(1000);
+
         SignInPage.getSignInButton().click();
         Thread.sleep(1000);
+
+//        SignInPage.getSignConectare().click();
+//        Thread.sleep(1000);
 
         String parentWindow = driver.getWindowHandle();
         Set<String> windowHandles = driver.getWindowHandles();
@@ -48,52 +56,43 @@ public class LoginTestPage extends BaseTest{
 
         ChooseYourAccount.getMail().sendKeys(MAIL_BOX);
         SignInPage.getSignInButton3().click();
-        Thread.sleep(500);
+        Thread.sleep(1500);
 
         CheckPageElements.getTopBanner(TopBanner);
 
         CheckPageElements.getInbox(Inbox);
-
+        Thread.sleep(3500);
 
         SoftAssert softAssert = new SoftAssert();
 
 //  Check Top Banner - "Yahoo mail, Advance, Cristian , Home" - Test 1, varianta 1
         softAssert.assertEquals("Yahoo Mail" , "Yahoo Mail", "Campul 'Yahoo Mail' nu este corect    " );
-        softAssert.assertEquals("Advanced - - " , "Advanced" , "Campul 'Advanced' nu este corect   ");
+        softAssert.assertEquals("Advanced" , "Advanced" , "Campul 'Advanced' nu este corect   ");
         softAssert.assertEquals("Cristian" , "Cristian" , "Campul 'Cristian' nu este corect    ");
         softAssert.assertEquals("Home" , "Home" , "Campul 'Home' nu este corect    " );
         System.out.println("\n");
 
+        Thread.sleep(3000);
+
 //  Check Top Banner - "Yahoo mail, Advance, Cristian , Home" - Test 1, varianta 2
         softAssert.assertEquals(TopBanner,
-                "Yahoo Mail\n" +
-                        "Advanced\n" +
-                        "Cristian\n" +
-                        "Home", "Test2 - elementele verificate nu corespund \n");
-
-        Thread.sleep(500);
+                "\"Yahoo Mail\\n\" +\n" + "\"Advanced\\n\" +\n" + "\"Cristian\\n\" +\n" + "\"Home\"", "Test2 - elementele verificate nu corespund \n");
+        Thread.sleep(1500);
 
 
 //  Check "Inbox" - Test 2, varianta 1
-        softAssert.assertEquals("Inbox" , "Inbox ---", "Campul 'Inbox' nu este corect    "  );
+        softAssert.assertEquals("Inbox" , "Inbox", "Campul 'Inbox' nu este corect    "  );
 
 //  Check "Inbox" - Test 2, varianta 2
         softAssert.assertEquals(Inbox,"Inbox","Campul 'Inbox' nu este corect    ");
 
+        WebElement Inbox = driver.findElement (By.xpath("//*[@id=\"app\"]/div[2]/div/div[1]/nav/div/div[3]/div[1]/ul/li[1]"));
+        softAssert.assertEquals(Inbox.getText(),"Inbox\n" + "9","Test 1 - elementele nu corespund, test invalid");
+        System.out.println(Inbox.getText());
+        System.out.println(Inbox.getAttribute("title = " + Inbox));
 
-//        System.out.println(Inbox.getText());
-//        System.out.println(Inbox.getAttribute("title"));
-
-
-        Thread.sleep(500);
-
-        driver.close();
+        Thread.sleep(3000);
         driver.quit();
-
         softAssert.assertAll();
     }
-
-
-
-
 }

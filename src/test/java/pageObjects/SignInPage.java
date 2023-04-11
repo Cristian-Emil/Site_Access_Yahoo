@@ -10,13 +10,26 @@ public class SignInPage {
     public SignInPage(WebDriver driver){
         PageFactory.initElements(driver, this);
     }
-//----------------------------------------------------------------------------------------------------------------------
-    @FindBy(xpath = "/html/body/header/div[1]/div/div/div/div/div[2]/div/div[3]/div[1]/div/a")
-    private static WebElement signInButton;
 
+//----------------------------------------------------------------------------------------------------------------------
+    @FindBy(xpath = "//*[@id=\"consent-page\"]/div/div/div/form/div[2]/div[2]/button[1]")
+    private static WebElement acceptButton;
+
+    public static WebElement getAcceptButton() { return acceptButton; }
+
+//----------------------------------------------------------------------------------------------------------------------
+    @FindBy(xpath = "//*[@id=\"ybarAccountProfile\"]/a")
+    private static WebElement signInButton;
     public static WebElement getSignInButton() { return signInButton; }
 
-//---------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
+
+    @FindBy(xpath = "//*[@id=\"signin-main\"]/div[1]/a")
+//  id = "menu.btn"
+    private static WebElement signConectare;
+    public static WebElement getSignConectare() { return signConectare; }
+
+//----------------------------------------------------------------------------------------------------------------------
     @FindBy(xpath = "//*[@id=\"login-signin\"]")
     private static WebElement signInButton1;
 
@@ -33,6 +46,5 @@ public class SignInPage {
     private static WebElement signInButton3;
 
     public static WebElement getSignInButton3() { return signInButton3; }
-
 
 }
